@@ -5,11 +5,13 @@ label{
 .input{
     width: 260px;
     outline: none;
+    display: block;
 }
 
 textarea{
     width: 260px;
     outline: none;
+    display: block;
 }
 
 .radio{
@@ -23,4 +25,8 @@ textarea{
 button{
     outline: none;
     border: none;
+}
+
+.error{
+    color: red;
 }
