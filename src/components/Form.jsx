@@ -51,6 +51,33 @@ function Form() {
                 document.getElementById("p-error").textContent= ""
             }
 
+            const confirmPassword = document.getElementById("c-password").value.trim();
+            if(confirmPassword === ""){
+                document.getElementById("C-error").textContent = "Please confirm password";
+            }else if(password !== confirmPassword){
+                document.getElementById("C-error").textContent = "Password doesn't match"
+            }else{
+                document.getElementById("C-error").textContent = "";
+            }
+
+            const phone = document.getElementById("No").value.trim();
+            if(phone === ""){
+                document.getElementById("no-error").textContent = "Enter phone number"
+            }else if(!phone.startsWith("03")){
+                document.getElementById("no-error").textContent = "Must start with 03"
+            }else if(phone.length < 11){
+                document.getElementById("no-error").textContent = "Must be 11 digits"
+            }else{
+                document.getElementById("no-error").textContent = ""
+            }
+            const address = document.getElementById("address").value.trim();
+            if(address === ""){
+                document.getElementById("ad-error").textContent = "Enter the address"
+            }else if(address.length < 10){
+                document.getElementById("ad-error").textContent = "Write atleast 10 characters"
+            }else{
+                document.getElementById("ad-error").textContent = ""
+            }
             return valid;
         }
         const handlesubmit = (e) => {
@@ -72,7 +99,7 @@ function Form() {
     return (
         <>
             <div className='d-flex justify-content-center mt-4'>
-                <form id='form' class="form-content p-5 rounded-2" action="">
+                <form id='form' className="form-content p-5 rounded-2" action="">
                     <label>First Name</label>
                     <input className='input' id='first' type="text" />
                     <span id='f-error' className='error'></span>
@@ -97,11 +124,11 @@ function Form() {
                     <textarea name="" id="address" cols="30" rows="10"></textarea>
                     <span id='ad-error' className='error'></span>
                     <label for="">Gender</label>
-                    <div class="radio d-flex gap-3">
+                    <div className="radio d-flex gap-3">
                         <input type="radio" name="radio" id="" />Male
                         <input type="radio" name="radio" id="" />Female
                     </div>
-                    <button className='text-white d-block m-auto bg-dark mt-2 p-1 rounded-2'>Register</button>
+                    <button className='text-white d-block m-auto bg-dark mt-3 p-1 rounded-2'>Register</button>
                 </form>
             </div>
         </>
