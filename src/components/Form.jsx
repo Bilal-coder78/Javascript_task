@@ -43,46 +43,78 @@ function Form() {
             }
 
             const password = document.getElementById("password").value.trim();
-            if(password === ""){
-                document.getElementById("p-error").textContent= "Enter the password"
-            }else if(password.length < 8){
-                document.getElementById("p-error").textContent= "Enter the unique password"
-            }else{
-                document.getElementById("p-error").textContent= ""
+            if (password === "") {
+                document.getElementById("p-error").textContent = "Enter the password"
+            } else if (password.length < 8) {
+                document.getElementById("p-error").textContent = "Enter the unique password"
+            } else {
+                document.getElementById("p-error").textContent = ""
             }
 
             const confirmPassword = document.getElementById("c-password").value.trim();
-            if(confirmPassword === ""){
+            if (confirmPassword === "") {
                 document.getElementById("C-error").textContent = "Please confirm password";
-            }else if(password !== confirmPassword){
+            } else if (password !== confirmPassword) {
                 document.getElementById("C-error").textContent = "Password doesn't match"
-            }else{
+            } else {
                 document.getElementById("C-error").textContent = "";
             }
 
             const phone = document.getElementById("No").value.trim();
-            if(phone === ""){
+            if (phone === "") {
                 document.getElementById("no-error").textContent = "Enter phone number"
-            }else if(!phone.startsWith("03")){
+            } else if (!phone.startsWith("03")) {
                 document.getElementById("no-error").textContent = "Must start with 03"
-            }else if(phone.length < 11){
+            } else if (phone.length < 11) {
                 document.getElementById("no-error").textContent = "Must be 11 digits"
-            }else{
+            } else {
                 document.getElementById("no-error").textContent = ""
             }
             const address = document.getElementById("address").value.trim();
-            if(address === ""){
+            if (address === "") {
                 document.getElementById("ad-error").textContent = "Enter the address"
-            }else if(address.length < 10){
+            } else if (address.length < 10) {
                 document.getElementById("ad-error").textContent = "Write atleast 10 characters"
-            }else{
+            } else {
                 document.getElementById("ad-error").textContent = ""
+            }
+
+            const gender = document.querySelector('input[name="radio"]:checked');
+            if (!gender) {
+                document.getElementById("gender-error").textContent = "Please select the gender";
+            } else {
+                document.getElementById("gender-error").textContent = "";
             }
             return valid;
         }
         const handlesubmit = (e) => {
-            if (!validform()) {
-                e.preventDefault()
+            e.preventDefault()
+            if (validform()) {
+                const firstname = document.getElementById("first").value.trim();
+                const lastname = document.getElementById("second").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const password = document.getElementById("password").value.trim();
+                const date = document.querySelector('input[type="date"]').value;
+                const phone = document.getElementById("No").value.trim();
+                const address = document.getElementById("address").value.trim();
+                const gender = document.querySelector('input[name="radio"]:checked').value;
+
+                const tbody = document.getElementById("table-body");
+                const newRow = document.createElement("tr")
+
+                newRow.innerHTML = `
+                <td>${firstname}</td>
+                <td>${lastname}</td>
+                <td>${email}</td>
+                <td>${password}</td>
+                <td>${date}</td>
+                <td>${phone}</td>
+                <td>${address}</td>
+                <td>${gender}</td>
+                `
+                tbody.appendChild(newRow);
+
+                form.reset();
             }
         }
 
@@ -98,6 +130,13 @@ function Form() {
     }, [])
     return (
         <>
+        <div style={{backgroundColor:"#f7f8ffff"}}>
+            <div className='d-flex align-items-center justify-content-between p-2'>
+                <h1> </h1>
+                <h2>Add User</h2>
+                <div className='bg-dark p-1 rounded-1'><h3 className='text-white fs-5 pointer'>Login</h3></div>
+            </div>
+        </div>
             <div className='d-flex justify-content-center mt-4'>
                 <form id='form' className="form-content p-5 rounded-2" action="">
                     <label>First Name</label>
@@ -125,12 +164,30 @@ function Form() {
                     <span id='ad-error' className='error'></span>
                     <label for="">Gender</label>
                     <div className="radio d-flex gap-3">
-                        <input type="radio" name="radio" id="" />Male
-                        <input type="radio" name="radio" id="" />Female
+                        <input type="radio" name="radio" value="Male" />Male
+                        <input type="radio" name="radio" value="Female" />Female
                     </div>
+                    <span id='gender-error' className='error'></span>
                     <button className='text-white d-block m-auto bg-dark mt-3 p-1 rounded-2'>Register</button>
                 </form>
             </div>
+            <table id='user-table' className='table mt-4' border={1}>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Date</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody id='table-body'>
+
+                </tbody>
+            </table>
         </>
     )
 }
