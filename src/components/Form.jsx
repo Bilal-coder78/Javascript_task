@@ -130,6 +130,7 @@ function Form() {
     }, [])
     return (
         <>
+        <div className="container">
             <div style={{ backgroundColor: "#f7f8ffff" }}>
                 <div className='d-flex align-items-center justify-content-between p-2'>
                     <h1> </h1>
@@ -188,6 +189,7 @@ function Form() {
 
                 </tbody>
             </table>
+            </div>
         </>
     )
 }
